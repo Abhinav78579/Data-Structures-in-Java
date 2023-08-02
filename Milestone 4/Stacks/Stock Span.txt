@@ -1,0 +1,27 @@
+import java.util.Stack;
+public class Solution {
+
+	public static int[] stockSpan(int[] price) {
+		//Your code goes here
+		int[] span=new int[price.length];
+
+		Stack<Integer> days=new Stack<>();
+		 days.push(0);
+		span[0]=1;
+		for(int i=1 ; i<price.length ; i++){
+			while(!days.isEmpty() && price[days.peek()]<price[i]){
+				days.pop();
+			}
+			if(!days.isEmpty()){
+				span[i]=i-days.peek();
+			}else{
+				span[i]=i+1;
+			}
+			days.push(i);
+
+			
+		}
+		return span;
+	}
+
+}

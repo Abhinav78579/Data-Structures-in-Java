@@ -1,0 +1,52 @@
+public class solution {
+
+	public static void printKeypad(int n, String ans){
+		// Write your code here
+		if(n<=1){
+			System.out.println(ans);
+			return;
+		}
+		String[] help=helper(n%10);//attach the decisions a,b,c....
+		for(int i=0;i<help.length;i++){
+		printKeypad(n/10, help[i]+ans);//for reducing the digits and concatenating in the ans string
+		}
+
+
+		}
+	public static void printKeypad(int n){
+		printKeypad(n,"");
+	}
+	
+	private static String[] helper(int n) {
+		String help[] = new String[3];
+		switch (n) {
+			case 2:
+				help = new String[] { "a", "b", "c" };
+				break;
+			case 3:
+				help = new String[] { "d", "e", "f" };
+				break;
+			case 4:
+				help = new String[] { "g", "h", "i" };
+				break;
+			case 5:
+				help = new String[] { "j", "k", "l" };
+				break;
+			case 6:
+				help = new String[] { "m", "n", "o" };
+				break;
+			case 7:
+				help = new String[] { "p", "q", "r", "s" };
+				break;
+			case 8:
+				help = new String[] { "t", "u", "v" };
+				break;
+			case 9:
+				help = new String[] { "w", "x", "y", "z" };
+				break;
+			default:
+				break;
+		}
+		return help;
+	}
+}

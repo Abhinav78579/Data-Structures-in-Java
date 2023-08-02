@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+public class Solution {
+
+	public static ArrayList<Integer> kLargest(int arr[], int k) {
+		/* Your class should be named Solution
+		* Don't write main().
+		* Don't read input, it is passed as function argument.
+		* Return output and don't print it.
+		* Taking input and printing output is handled automatically.
+		*/
+		PriorityQueue<Integer> pq=new PriorityQueue<>();
+		int i=0;
+		for(; i<k ;i++){
+			pq.add(arr[i]);
+		}
+		for(;i<arr.length;i++){
+			int min=pq.element();
+			if(min < arr[i]){
+				pq.remove();
+				pq.add(arr[i]);
+			}
+		}
+	 ArrayList<Integer> arr1 = new ArrayList<Integer>();
+        while(!pq.isEmpty())
+            arr1.add(pq.poll());
+        return arr1;
+	}
+}

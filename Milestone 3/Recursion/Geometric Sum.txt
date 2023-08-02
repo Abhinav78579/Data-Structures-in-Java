@@ -1,0 +1,15 @@
+
+public class solution {
+
+	public static double findGeometricSum(int k) {
+		// Write your code here
+		if(k==0){
+			return 1;
+		}
+		double ans= (1/(Math.pow(2, k)))+findGeometricSum(k-1); 
+    //Time consuming since Math library is called as well as more no. of computations/operations [Division cost].
+		return ans;
+		//return 1+ 0.5*(findGeometricSum(k-1));
+
+	}
+}

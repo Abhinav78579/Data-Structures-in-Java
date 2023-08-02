@@ -1,0 +1,125 @@
+import java.util.*;
+public class Solution {
+
+/*	TreeNode structure 
+ * 
+ * class TreeNode<T> {
+		T data;
+		ArrayList<TreeNode<T>> children;
+
+		TreeNode(T data){
+			this.data = data;
+			children = new ArrayList<TreeNode<T>>();
+		}
+	}*/
+	
+	
+	
+	public static void printLevelWise(TreeNode<Integer> root){
+		/* Your class should be named Solution 
+ 		 * Don't write main(). 
+		 * Don't read input, it is passed as function argument. 
+		 * Print output and don't return it. 
+		 * Taking input is handled automatically. 
+		 */
+		  Queue<TreeNode<Integer>> q = new LinkedList<>();
+        if(root == null)
+            return;
+        q.add(root);
+        q.add(null);
+        
+        while(!q.isEmpty()){
+            TreeNode<Integer> node = q.poll();
+            if(node != null)
+            {
+                System.out.print(node.data + " ");
+                for(int i=0; i<node.children.size(); i++)
+                    q.add(node.children.get(i));
+            }
+            else{
+                System.out.println();
+                if(!q.isEmpty())
+                    q.add(null);
+            }
+        }
+
+	}
+		
+}
+/*
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
+public class Solution {
+	/*
+	 * BinaryTreeNode class
+	 * 
+	 * class BinaryTreeNode<T> 
+	 * { 
+	 * 		T data; 
+	 * 		BinaryTreeNode<T> left; 
+	 * 		BinaryTreeNode<T> right;
+	 *		public BinaryTreeNode(T data) 
+	 *		{
+	 *  		this.data = data; 
+	 *  	} 
+	 *  }
+	 */
+	/*
+	 * LinkedListNode Class
+	 * class LinkedListNode<T> 
+	 * { 
+	 * 		T data; 
+	 * 		LinkedListNode<T> next;
+	 * 		public LinkedListNode(T data) 	
+	 * 		{
+	 *  		this.data = data; 
+	 *  	} 
+	 *  }
+	 */
+	public static ArrayList<LinkedListNode<Integer>> constructLinkedListForEachLevel(BinaryTreeNode<Integer> root){
+		// Write your code here
+		ArrayList<LinkedListNode<Integer>> ans = new ArrayList<LinkedListNode<Integer>>();
+		Queue<BinaryTreeNode<Integer>> q = new LinkedList<>();
+		if(root==null){
+			return null;
+		}
+		q.add(root);
+		q.add(null);
+		LinkedListNode<Integer> head=null;
+		LinkedListNode<Integer> tail=null;
+
+		while(!q.isEmpty()){
+            BinaryTreeNode<Integer> temp=q.poll();
+            if (temp==null){
+                if (q.isEmpty())
+                    break;
+                else{
+                	q.add(null);
+                    tail.next=null;
+                    tail=tail.next;
+                    head=null;   
+                }
+            }
+            else{
+                if (head==null)
+                {
+                    head = new LinkedListNode<Integer>(temp.data);
+                    tail=head;
+                    ans.add(head);
+                }
+                else
+                {
+                    tail.next=new LinkedListNode<Integer>(temp.data);
+                    tail=tail.next;
+                }
+                if (temp.left!=null)
+                    q.add(temp.left);
+                if (temp.right!=null)
+                    q.add(temp.right);
+            }
+        }
+        return ans;
+	}
+}
+

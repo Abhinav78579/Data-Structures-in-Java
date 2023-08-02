@@ -1,0 +1,55 @@
+public class solution {
+
+	public static void mergeSort(int[] input){
+		// Write your code here
+		if(input.length<=1){//necessary base case
+			return;
+		}
+		
+		int n1=input.length/2;
+		int n2=input.length-input.length/2;
+		int p1[]=new int[n1];//part 1 array
+		int p2[]=new int[n2];//part2 array
+		//copy the elements to array
+		for(int i=0;i<n1;i++){
+			p1[i]=input[i];
+		}
+		for(int j=0;j<n2;j++){
+			p2[j]=input[n1];
+			n1++;//as mid+1 are the elements that have to be inserted into the second part of array
+		}
+		mergeSort(p1);//recursion
+		mergeSort(p2);
+		merge(input,p1,p2);
+		
+	}
+	private static void merge(int input[],int p1[],int p2[]){
+		int i = 0, j = 0;
+		int k = 0;
+		while (i < p1.length && j < p2.length) {
+			if (p1[i] < p2[j]) {
+				input[k] = p1[i];
+				i++;
+				k++;
+			} else {
+				input[k] = p2[j];
+				j++;
+				k++;
+			}
+		}
+		
+		while (i < p1.length) {
+			input[k] = p1[i];
+			i++;
+			k++;
+		}
+		
+		
+		while (j < p2.length) {
+			input[k] = p2[j];
+			j++;
+			k++;
+		}
+		
+	}
+}

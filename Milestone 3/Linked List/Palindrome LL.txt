@@ -1,0 +1,49 @@
+
+public class Solution {
+ 	public static LinkedListNode<Integer> midPoint(LinkedListNode<Integer> head){
+		LinkedListNode<Integer> slow=head;
+		LinkedListNode<Integer> fast=head;
+		while(fast.next != null && fast.next.next != null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		return slow;
+	}
+		public static LinkedListNode<Integer> reverse(LinkedListNode<Integer> head) {
+		//Your code goes here
+		if(head == null || head.next==null){
+			return head;
+		}
+		LinkedListNode<Integer> tail=head.next;
+		LinkedListNode<Integer> smallHead=reverse(head.next);
+		tail.next=head;
+		head.next=null;
+		return smallHead;
+		
+	}
+
+
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+		//Your code goes here
+		if(head == null){
+			return true;
+		}
+		LinkedListNode<Integer> mid,last,cur;
+		mid=midPoint(head);
+		last=reverse(mid.next);
+		cur=head;
+		while(last != null){
+			if(last.data != cur.data){
+				return false;
+			}
+			last = last.next;
+			cur = cur.next;
+		}
+		return true;
+	}
+
+		
+
+ }
+
